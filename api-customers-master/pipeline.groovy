@@ -3,7 +3,7 @@
 def Build(){
     sh """
     cd api-customers-master
-    echo $pwd"
+    echo "We are currently in directory $pwd"
     mvn clean install
     """
 }
