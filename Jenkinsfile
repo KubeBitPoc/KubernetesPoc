@@ -17,12 +17,12 @@ podTemplate(label: 'Jenkins', containers: [
       
     checkout scm
 	echo "$PWD ==="
-	def pipeline = load 'api-customers-master/pipeline.groovy'
-	pipeline.pipeline()
+	def pipelineC = load 'api-customers-master/pipeline.groovy'
+	
 
     stage('Build') {
       container('maven') {
-		pipeline.Build()
+		pipelineC.Build()
       }
     }
 
@@ -31,13 +31,13 @@ podTemplate(label: 'Jenkins', containers: [
 
     stage('Create Docker images') {
       container('docker') {
-			pipeline.DockerImg()
+			pipelineC.DockerImg()
         }
       }
     }
     stage('Run helm') {
       container('helm') {
-        pipeline.RunHelm()
+        pipelineC.RunHelm()
     }
   }
 }
