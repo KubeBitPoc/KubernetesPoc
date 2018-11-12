@@ -1,9 +1,11 @@
 #!/usr/bin/groovy
 
 def Build(){
-    sh "cd api-customers-master"
-    sh "echo $pwd"
-    sh "mvn clean install"  
+    sh """
+    cd api-customers-master
+    echo $pwd"
+    mvn clean install
+    """
 }
 
 def DockerImg(){
