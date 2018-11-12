@@ -16,12 +16,12 @@ podTemplate(label: 'Jenkins', containers: [
          
     checkout scm
 	echo "$PWD ==="
-	def pipCustomer = load 'api-customers/customers.groovy'
-	def pipEmployees = load 'api-employees/employees.groovy'
-	def orders = load 'api-orders/orders.groovy'
-	def products = load 'api-products/products.groovy'
-	def NginxReverseProxy = load 'NginxReverseProxy/NginxReverseProxy.groovy'
-	def webapp = load 'webapp/webapp.groovy'
+	def pipCustomer = load 'api-customers/build.groovy'
+	def pipEmployees = load 'api-employees/build.groovy'
+	def orders = load 'api-orders/build.groovy'
+	def products = load 'api-products/build.groovy'
+	def NginxReverseProxy = load 'NginxReverseProxy/build.groovy'
+	def webapp = load 'webapp/build.groovy'
 	
 	
     //Build code
