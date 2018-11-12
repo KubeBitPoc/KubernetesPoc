@@ -9,23 +9,19 @@ def DockerImg(){
           usernameVariable: 'DOCKER_HUB_USER',
           passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
           sh """
-			cd NginxReverseProxy
-            echo "Attempting docker login using ${DOCKER_HUB_USER}"
+			cd webapp
             docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-            echo "We are currently in directory $pwd"
-			docker build -t anilbb/webapp-proxy:latest .
-            docker push anilbb/webapp-proxy:latest
-			
-            """
+            docker build -t anilbb/webapp-smt:latest .
+            docker push anilbb/webapp-smt:latest
+			"""
         }
 }
    
 def RunHelm(){
-
-		sh "helm list"
+        sh "helm list"
         
           try{
-            sh "helm del --purge nginxreverseproxy-helm"
+            sh "helm del --purge webapp-helm"
           }
           catch(error) {
               echo "No previous helm deployments found"
@@ -35,7 +31,7 @@ def RunHelm(){
           echo "Removing the current helm chart package"
        
           try{
-                sh "rm -f nginxreverseproxy/helm/nginxreverseproxy-helm-0.1.0.tgz"
+                sh "rm -f webapp/helm/webapp-helm-0.1.0.tgz"
           }catch(error) {
               echo "No previous helm package found"
           }
@@ -43,18 +39,16 @@ def RunHelm(){
           
           echo "Creating the new helm package"
           try {  
-            sh "helm package nginxreverseproxy/helm/nginxreverseproxy-helm" 
+            sh "helm package webapp/helm/webapp-helm" 
           } catch(error) {
               echo "created the package"
           }
-          sh "cp wnginxreverseproxy-helm-0.1.0.tgz nginxreverseproxy/helm/"
+          sh "cp webapp-helm-0.1.0.tgz webapp/helm/"
           echo "Installing the new helm package"
           
-        sh "helm install --name nginxreverseproxy-helm nginxreverseproxy/helm/nginxreverseproxy-helm-0.1.0.tgz"
+        sh "helm install --name webapp-helm webapp/helm/webapp-helm-0.1.0.tgz"
         
-        echo "Application anilbb/webapp-proxy successfully deployed. Use helm status anilbb/webapp-proxy to check"
-		
-		
-	}
-	
+        echo "Application anilbb/webapp successfully deployed. Use helm status anilbb/webapp to check"
+ }
+ 
 return this
