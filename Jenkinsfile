@@ -13,8 +13,7 @@ podTemplate(label: 'Jenkins', containers: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),  
 ]) {
   node('Jenkins') {
-   
-      
+         
     checkout scm
 	echo "$PWD ==="
 	def pipelineC = load 'api-customers/pipeline.groovy'
@@ -32,7 +31,7 @@ podTemplate(label: 'Jenkins', containers: [
     stage('Create Docker images') {
       container('docker') {
 			pipelineC.DockerImg()
-        }
+        
       }
     }
     stage('Run helm') {
