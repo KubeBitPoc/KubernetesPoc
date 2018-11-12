@@ -55,4 +55,4 @@ def RunHelm(){
         echo "Application anilbb/api-customers successfully deployed. Use helm status anilbb/api-customers to check"
  }
  
-
+return this
