@@ -16,27 +16,46 @@ podTemplate(label: 'Jenkins', containers: [
          
     checkout scm
 	echo "$PWD ==="
-	def pipelineC = load 'api-customers/pipeline.groovy'
+	def pipCustomer = load 'api-customers/customers.groovy'
+	def pipEmployees = load 'api-employees/employees.groovy'
+	def orders = load 'api-orders/orders.groovy'
+	def products = load 'api-products/products.groovy'
+	def NginxReverseProxy = load 'NginxReverseProxy/NginxReverseProxy.groovy'
+	def webapp = load 'webapp/webapp.groovy'
+	
 	
     //Build code
     stage('Build') {
       container('maven') {
-		pipelineC.Build()
+		pipCustomer.Build()
+		pipEmployees.Build()
+		orders.Build()
+		products.Build()		
       }
     }
 
    //build docker image
     stage('Create Docker images') {
       container('docker') {
-			pipelineC.DockerImg()
-        
+			NginxReverseProxy.DockerImg()
+			webapp.DockerImg()
+			pipCustomer.DockerImg()
+			pipEmployees.DockerImg()
+			orders.DockerImg()
+			products.DockerImg()			
       }
     }
 	  
     //run helm	  
     stage('Run helm') {
       container('helm') {
-        pipelineC.RunHelm()
+			NginxReverseProxy.RunHelm()
+			webapp.RunHelm()
+			pipCustomer.RunHelm()
+			pipEmployees.RunHelm()
+			orders.RunHelm()
+			products.RunHelm()
+        
     }
   }
  }
