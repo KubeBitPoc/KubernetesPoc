@@ -18,26 +18,27 @@ podTemplate(label: 'Jenkins', containers: [
 	echo "$PWD ==="
 	def pipelineC = load 'api-customers/pipeline.groovy'
 	
-
+    //Build code
     stage('Build') {
       container('maven') {
 		pipelineC.Build()
       }
     }
 
-    //pull the code at this location to build and deploy
-    
-
+   //build docker image
     stage('Create Docker images') {
       container('docker') {
 			pipelineC.DockerImg()
         
       }
     }
+	  
+    //run helm	  
     stage('Run helm') {
       container('helm') {
         pipelineC.RunHelm()
     }
   }
+ }
 }
 
