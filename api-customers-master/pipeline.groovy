@@ -1,6 +1,7 @@
 #!/usr/bin/groovy
 
 def Build(){
+    sh "cd api-customers-master"
     sh "echo $pwd"
     sh "mvn clean install"  
 }
