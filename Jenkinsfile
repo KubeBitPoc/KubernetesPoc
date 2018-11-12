@@ -16,8 +16,8 @@ podTemplate(label: 'Jenkins', containers: [
    
       
     checkout scm
-	
-	def pipeline = load 'api-customers/pipeline.groovy'
+	echo "$PWD ==="
+	def pipeline = load 'api-customers-master/pipeline.groovy'
 	pipeline.pipeline()
 
     stage('Build') {
