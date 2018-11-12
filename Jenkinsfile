@@ -25,17 +25,17 @@ podTemplate(label: 'Jenkins', containers: [
 	
 	
     //Build code
-  /*  stage('Build') {
+    stage('Build') {
       container('maven') {
 		pipCustomer.Build()
 		pipEmployees.Build()
 		orders.Build()
 		products.Build()		
       }
-    }*/
+    }
 
    //build docker image
-   /* stage('Create Docker images') {
+    stage('Create Docker images') {
       container('docker') {
 			NginxReverseProxy.DockerImg()
 			webapp.DockerImg()
@@ -44,7 +44,7 @@ podTemplate(label: 'Jenkins', containers: [
 			orders.DockerImg()
 			products.DockerImg()			
       }
-    }*/
+    }
 	  
     //run helm	  
     stage('Run helm') {
