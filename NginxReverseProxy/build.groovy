@@ -50,7 +50,7 @@ def RunHelm(){
 			helm package helm/NginxReverseProxy-helm
 			"""
 		 sh "ls NginxReverseProxy/helm/ "
-            sh "helm package NginxReverseProxy/helm/NginxReverseProxy-helm" 
+            //sh "helm package NginxReverseProxy/helm/NginxReverseProxy-helm" 
           } catch(error) {
               echo "created the package"
           }
