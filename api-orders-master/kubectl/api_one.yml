@@ -1,0 +1,37 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"api-one-controller",
+      "labels":{
+         "app":"api-one-controller"
+      }
+   },
+   "spec":{
+      "replicas":2,
+      "selector":{
+         "app":"api-one"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "app":"api-one"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"api-one",
+                  "image":"anilbb/api-one",
+                  "ports":[
+                     {
+                        "name":"spring-one-port",
+                        "containerPort":9119
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

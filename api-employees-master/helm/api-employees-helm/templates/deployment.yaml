@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-employees-deployment
+  labels:
+    app: api-employees
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: api-employees
+  template:
+    metadata:
+      labels:
+        app: api-employees
+    spec:
+      containers:
+      - name: api-employees
+        image: {{ .Values.image.repository }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 9119
+          name: spring-port

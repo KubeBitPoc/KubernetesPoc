@@ -1,0 +1,18 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "api-service-one"
+    },
+    "spec": {
+      "ports": [{
+        "port": 4858,
+        "name": "balancer-one",
+        "targetPort": "spring-one-port"
+      }],
+      "selector": {
+        "app": "api-one"
+      },
+      "type": "LoadBalancer"
+    }
+  }
