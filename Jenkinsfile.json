@@ -1,6 +1,6 @@
 {  
   "pipeline": {
-      "build": false,
+      "build": true,
       "deployment": true,
 	  "nginexKubectl": true
   }
