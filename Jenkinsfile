@@ -49,7 +49,7 @@ podTemplate(label: 'Jenkins', containers: [
     //run helm	  
     stage('Run helm') {
       container('helm') {
-			NginxReverseProxy.RunHelm()
+			//NginxReverseProxy.RunHelm()
 			webapp.RunHelm()
 			pipCustomer.RunHelm()
 			pipEmployees.RunHelm()
