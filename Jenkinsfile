@@ -46,6 +46,13 @@ podTemplate(label: 'Jenkins', containers: [
       }
     }
 	  */
+	  
+   //Deploy Nginex
+    stage("deploy Nginex"){
+	container('kubectl') {
+		  NginxReverseProxy.RunKubectl()
+	}
+      }
     //run helm	  
     stage('Run helm') {
       container('helm') {
