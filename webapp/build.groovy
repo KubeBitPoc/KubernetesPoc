@@ -31,7 +31,7 @@ def RunHelm(){
           echo "Removing the current helm chart package"
        
           try{
-                sh "rm -f webapp/helm/webapp-helm-0.1.0.tgz"
+                sh "rm -f webapp/helm/web-app-0.1.0.tgz"
           }catch(error) {
               echo "No previous helm package found"
           }
@@ -39,14 +39,14 @@ def RunHelm(){
           
           echo "Creating the new helm package"
           try {  
-            sh "helm package webapp/helm/webapp-helm" 
+            sh "helm package webapp/helm/web-app" 
           } catch(error) {
               echo "created the package"
           }
-          sh "cp webapp-helm-0.1.0.tgz webapp/helm/"
+          sh "cp web-app-0.1.0.tgz webapp/helm/"
           echo "Installing the new helm package"
           
-        sh "helm install --name webapp-helm webapp/helm/webapp-helm-0.1.0.tgz"
+        sh "helm install --name webapp-helm webapp/helm/web-app-0.1.0.tgz"
         
         echo "Application anilbb/webapp successfully deployed. Use helm status anilbb/webapp to check"
  }
