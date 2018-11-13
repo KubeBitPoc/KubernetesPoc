@@ -55,7 +55,7 @@ podTemplate(label: 'Jenkins', containers: [
 		  
 	   //Deploy Nginex
 	   if (config.pipeline.deployment) {
-			 if (config.pipeline.nginex-kubectl){
+			 if (config.pipeline.nginexKubectl){
 				stage("deploy Nginex"){
 				  container('kubectl') {
 						NginxReverseProxy.RunKubectl()
@@ -65,7 +65,7 @@ podTemplate(label: 'Jenkins', containers: [
 			//run helm	  
 			stage('Run helm') {
 			  container('helm') {
-				if (!config.pipeline.nginex-kubectl){
+				if (!config.pipeline.nginexKubectl){
 					NginxReverseProxy.RunHelm()
 				}
 				webapp.RunHelm()
