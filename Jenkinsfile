@@ -25,7 +25,7 @@ podTemplate(label: 'Jenkins', containers: [
 	
 	
     //Build code
-    stage('Build') {
+  /*  stage('Build') {
       container('maven') {
 		pipCustomer.Build()
 		pipEmployees.Build()
@@ -45,7 +45,7 @@ podTemplate(label: 'Jenkins', containers: [
 			products.DockerImg()			
       }
     }
-	  
+	  */
     //run helm	  
     stage('Run helm') {
       container('helm') {
