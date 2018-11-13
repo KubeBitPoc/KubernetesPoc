@@ -19,6 +19,21 @@ def DockerImg(){
             """
         }
 }
+
+def RunKubectl(){
+	 try {
+            sh "kubectl delete deployment frontend-deployment"
+	} catch(error) {}
+        
+        
+        sh "kubectl create -f NginxReverseProxy/frontend-deployment.yaml"
+        
+        try {
+            sh "kubectl delete service frontend-service"
+        } catch(error) {}
+        
+        sh "kubectl create -f NginxReverseProxy/frontend-service.yaml"
+}
    
 def RunHelm(){
 
