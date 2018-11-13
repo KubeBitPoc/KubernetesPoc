@@ -47,7 +47,7 @@ def RunHelm(){
 		sh "helm package NginxReverseProxy/helm/NginxReverseProxy"
 		 
           } catch(error) {
-              echo "created the package"
+              echo "Create package error : $error"
           }
           sh "cp NginxReverseProxy-0.1.0.tgz NginxReverseProxy/helm/"
           echo "Installing the new helm package"
