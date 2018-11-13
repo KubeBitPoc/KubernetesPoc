@@ -25,7 +25,7 @@ def RunHelm(){
 		sh "helm list"
         
           try{
-            sh "helm del --purge NginxReverseProxy-helm"
+            sh "helm del --purge NginxReverseProxy"
           }
           catch(error) {
               echo "No previous helm deployments found"
@@ -51,7 +51,7 @@ def RunHelm(){
           sh "cp NginxReverseProxy-0.1.0.tgz NginxReverseProxy/helm/"
           echo "Installing the new helm package"
           
-        sh "helm install --name NginxReverseProxy-helm NginxReverseProxy/helm/NginxReverseProxy-0.1.0.tgz"
+        sh "helm install --name NginxReverseProxy NginxReverseProxy/helm/NginxReverseProxy-0.1.0.tgz"
         
         echo "Application anilbb/webapp-proxy successfully deployed. Use helm status anilbb/webapp-proxy to check"
 		
