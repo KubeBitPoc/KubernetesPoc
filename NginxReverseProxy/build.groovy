@@ -43,7 +43,6 @@ def RunHelm(){
           
           echo "Creating the new helm package"
           try {  
-		sh " current dir $PWD"
 		sh "helm package NginxReverseProxy/helm/NginxReverseProxy"
 		 
           } catch(error) {
