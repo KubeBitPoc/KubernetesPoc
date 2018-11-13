@@ -28,7 +28,7 @@ podTemplate(label: 'Jenkins', containers: [
 		def config = new groovy.json.JsonSlurperClassic().parseText(inputFile)
 			
 		
-		/*
+		
 		//Build code
 		if (config.pipeline.build) {
 			stage('Build') {
@@ -52,29 +52,32 @@ podTemplate(label: 'Jenkins', containers: [
 			  }
 			}
 		}
-		  */
+		  
 	   //Deploy Nginex
 	   if (config.pipeline.deployment) {
-			 if (config.pipeline.nginexKubectl){
+			
+			//run helm	  
+			stage('Run helm') {
+			  container('helm') {				
+				webapp.RunHelm()
+				pipCustomer.RunHelm()
+				pipEmployees.RunHelm()
+				orders.RunHelm()
+				products.RunHelm()
+				  
+				 if (!config.pipeline.nginexKubectl){
+					NginxReverseProxy.RunHelm()
+				}
+			  }
+			}
+		   
+		    if (config.pipeline.nginexKubectl){
 				stage("deploy Nginex"){
 				  container('kubectl') {
 						NginxReverseProxy.RunKubectl()
 				  }
 				}
 			}
-			//run helm	  
-		/*	stage('Run helm') {
-			  container('helm') {
-				if (!config.pipeline.nginexKubectl){
-					NginxReverseProxy.RunHelm()
-				}
-				webapp.RunHelm()
-				pipCustomer.RunHelm()
-				pipEmployees.RunHelm()
-				orders.RunHelm()
-				products.RunHelm()			
-			  }
-			}*/
 		}
 	}
 }
