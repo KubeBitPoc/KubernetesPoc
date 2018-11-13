@@ -2,6 +2,6 @@
   "pipeline": {
       "build": true,
       "deployment": true,
-	  "nginex-kubectl": true
+	  "nginexKubectl": true
   }
 }
